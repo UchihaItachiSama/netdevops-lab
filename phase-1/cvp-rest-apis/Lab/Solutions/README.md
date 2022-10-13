@@ -16,7 +16,7 @@ example: rm cookiefile
 url -k -X POST -H 'Content-Type: application/json' \
  -d '{"userId":"arista","password":"arista"}' \
  https://cvp/cvpservice/login/authenticate.do \
- -c cvpcookiefile
+ -c ./cvpcookiefile
 ```
 
 ## Challenge-2
@@ -34,7 +34,7 @@ curl -k -X GET -b cvpcookiefile \
 - List of all devices that are in CVP inventory
 
 ```shell
-curl -k -X GET -b cookiefile \
+curl -k -X GET -b cvpcookiefile \
 "https://cvp/cvpservice/inventory/devices" \
 -H "accept: application/json" | jq
 ```

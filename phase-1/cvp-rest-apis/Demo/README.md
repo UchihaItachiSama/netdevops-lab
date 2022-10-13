@@ -54,4 +54,12 @@ curl -k -X GET -b cookiefile \
 -H "accept: application/json" | jq
 ```
 
+## Demo-3
+
+- Get the CVP Version and device inventory using `cvprac` library in a python script.
+
+```shell
+python3 cvprac_demo.py
+```
+
 That's it for the Demo head over the `Lab` folder to test your padwan skills in CVP REST APIs.

@@ -27,4 +27,13 @@ NOTE: Please feel free to login to CVP and take help from the `REST API Explorer
 
 - Get list of all devices under container named `Leaf`
 
+## Challenge-6 (Hard)
+
+- Using `cvprac` in python script print the following information for all switches in  CVP inventory:
+  - Hostname
+  - Model Name
+  - EOS Version
+  - IP Address
+  - MAC Address
+
 The solutions for these challenges are present under `Solutions` folder, however we would encourage to try to figure our the solution from the REST API Explorer.
