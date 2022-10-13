@@ -40,7 +40,7 @@ In Phase-1 of training we will be focusing on the following
 
 ```shell
 cd /home/coder/project/labfiles
-git clone git@github.com:UchihaItachiSama/netdevops-lab.git
+git clone https://github.com/UchihaItachiSama/netdevops-lab.git
 ```
 
 - The instructions for each demo/lab is present in the README.md file
