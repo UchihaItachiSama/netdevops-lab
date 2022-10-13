@@ -58,3 +58,16 @@ curl -k -X GET -b cvpcookiefile \
 "https://cvp/cvpservice/provisioning/getNetElementList.do?nodeId=container_12463e1d-8af6-43fa-986a-e4e249fd62df&startIndex=0&endIndex=0&ignoreAdd=true" \
 -H "accept: application/json" | jq
 ```
+
+## Challenge-6
+
+- Using `cvprac` in python script print the following information for all switches in  CVP inventory:
+  - Hostname
+  - Model Name
+  - EOS Version
+  - IP Address
+  - MAC Address
+  
+```shell
+python3 challenge-6.py
+```
