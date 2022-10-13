@@ -1,0 +1,30 @@
+# CVP REST APIs Lab
+
+In this folder your skills will be tested on what you have learned about CVP REST APIs.
+
+From the `Terminal` of `IDE` perform the following operations.
+
+NOTE: Please feel free to login to CVP and take help from the `REST API Explorer`
+
+## Challenge-1 (Easy)
+
+- Delete any existing session cookie files
+- Authenticate and obtain a new session cookie from CVP and store it into file named `cvpcookiefile`
+
+## Challenge-2 (Easy)
+
+- Get the list of all containers currently on CVP
+
+## Challenge-3 (Easy)
+
+- List of all devices that are in CVP inventory
+
+## Challenge-4 (Medium)
+
+- Get all configlets on CVP
+
+## Challenge-5 (Hard)
+
+- Get list of all devices under container named `Leaf`
+
+The solutions for these challenges are present under `Solutions` folder, however we would encourage to try to figure our the solution from the REST API Explorer.
