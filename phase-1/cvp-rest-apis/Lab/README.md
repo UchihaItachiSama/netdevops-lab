@@ -6,28 +6,28 @@ From the `Terminal` of `Programmability IDE` perform the following operations.
 
 NOTE: Please feel free to login to CVP and take help from the `REST API Explorer`
 
-## Challenge-1 (Easy)
+## Challenge-1
 
 - Delete any existing session cookie files
 - Authenticate and obtain a new session cookie from CVP and store it into file named `cvpcookiefile`
 
-## Challenge-2 (Easy)
+## Challenge-2
 
 - Get the list of all containers currently on CVP
 
-## Challenge-3 (Easy)
+## Challenge-3
 
 - List of all devices that are in CVP inventory
 
-## Challenge-4 (Medium)
+## Challenge-4
 
 - Get all configlets on CVP
 
-## Challenge-5 (Hard)
+## Challenge-5
 
 - Get list of all devices under container named `Leaf`
 
-## Challenge-6 (Hard)
+## Challenge-6
 
 - Using `cvprac` in python script print the following information for all switches in  CVP inventory:
   - Hostname
