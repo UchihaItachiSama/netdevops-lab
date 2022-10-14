@@ -2,7 +2,7 @@
 
 In this folder your skills will be tested on what you have learned about CVP REST APIs.
 
-From the `Terminal` of `IDE` perform the following operations.
+From the `Terminal` of `Programmability IDE` perform the following operations.
 
 NOTE: Please feel free to login to CVP and take help from the `REST API Explorer`
 
