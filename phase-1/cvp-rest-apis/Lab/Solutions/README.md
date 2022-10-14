@@ -69,5 +69,5 @@ curl -k -X GET -b cvpcookiefile \
   - MAC Address
   
 ```shell
-python3 challenge-6.py
+python3 challenge-6-solution.py
 ```
