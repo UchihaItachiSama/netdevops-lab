@@ -56,7 +56,7 @@ Management0 : https://192.168.0.12:443
 
 - Login to switch using SSH and run the `demo-2.py` script
 
-```json
+```shell
 leaf1#bash python3 /mnt/flash/demo-2.py
 
 {'id': 'FastCliSocketLib',
@@ -131,7 +131,7 @@ Unix Socket : unix:/var/run/command-api.sock
 
 - Login to switch using SSH and run the `demo-3.py` script
 
-```json
+```shell
 leaf1#bash python /mnt/flash/demo-3.py
 
 [{'architecture': 'i686',
@@ -185,7 +185,7 @@ show management api http-commands
 
 NOTE: Replace the login credentials as per your lab and IP address of the switch.
 
-```json
+```shell
 python3 demo-5.py
 
 [{'architecture': 'i686',
@@ -217,7 +217,7 @@ python3 demo-5.py
 
 NOTE: Replace the login credentials as per your lab and IP address of the switch.
 
-```json
+```shell
 python3 demo-6.py
 
 [{'command': 'show version',
