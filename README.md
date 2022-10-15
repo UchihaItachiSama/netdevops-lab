@@ -18,7 +18,7 @@ This module includes demo and practise labs on the following topics:
 - ansible-cvp collection
 - ansible-avd collection
 
-The labs are designed to be run on a AVD enviroment, but with changes to the login credentials and IPs can be used with a different CVP, EOS setup.
+The labs are designed to be run on a ATD enviroment, but with changes to the login credentials and IPs can be used with a different CVP, EOS setup.
 
 The module is divided across 4 days, as per the slide training deck.
 
