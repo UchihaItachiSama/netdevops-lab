@@ -5,6 +5,7 @@
 JSON example with various data types:
 
 `String` and `Number`
+
 ```json
 {
     "modelName": "cEOSLab",

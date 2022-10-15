@@ -12,10 +12,14 @@ else:
     # Handle target environment that doesn't support HTTPS verification
     ssl._create_default_https_context = _create_unverified_https_context
 
+# Update the credentials based on your Lab Setup
+USERNAME = 'arista'
+PASSWORD = 'arista'
+
 switch = Server( 'https://{}:{}@{}/command-api'.format(
-    'arista',
-    'arista',
-    '192.168.0.12'
+    USERNAME,
+    PASSWORD,
+    'leaf1'
 ) )
 
 response = switch.runCmds('latest', ['show version'])

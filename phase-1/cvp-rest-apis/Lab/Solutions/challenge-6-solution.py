@@ -7,9 +7,13 @@ ssl.create_default_https_context = ssl._create_unverified_context
 import requests.packages.urllib3
 requests.packages.urllib3.disable_warnings()
 
+# Update the credentials based on your Lab Setup
+USERNAME = 'arista'
+PASSWORD = 'arista'
+
 if __name__ == '__main__':
     client = CvpClient()
-    client.connect(nodes=['cvp'], username="arista", password="arista")
+    client.connect(nodes=['cvp'], username=USERNAME, password=PASSWORD)
     inventory = client.api.get_inventory()
     for device in inventory:
         print("Hostname: {} | Model Name: {} | EOS Version: {} | IP Address: {} | MAC Address: {}\n".format(

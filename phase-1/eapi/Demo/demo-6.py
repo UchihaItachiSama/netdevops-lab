@@ -12,7 +12,11 @@ else:
     # Handle target environment that doesn't support HTTPS verification
     ssl._create_default_https_context = _create_unverified_https_context
 
-node = pyeapi.connect(host='192.168.0.12', username='arista', password='arista', return_node=True)
+# Update the credentials based on your Lab Setup
+USERNAME = 'arista'
+PASSWORD = 'arista'
+
+node = pyeapi.connect(host='leaf1', username=USERNAME, password=PASSWORD, return_node=True)
 
 response = node.enable('show version')
 

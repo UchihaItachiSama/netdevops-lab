@@ -47,7 +47,6 @@ Management0 : https://192.168.0.12:443
 ## Demo-2
 
 - Using `EapiClientLib` we will locally connect to EAPI and get output of few show commands
-- Edit `demo-2.py` with relevant switch IP address and login credentials as per your ATD lab setup.
 - Copy `demo-2.py` to any of the switches using `scp`
 
 ```shell
@@ -122,7 +121,6 @@ Management0 : https://192.168.0.12:443
 Unix Socket : unix:/var/run/command-api.sock
 ```
 
-- Edit `demo-3.py` with relevant switch IP address and login credentials as per your ATD lab setup.
 - Copy `demo-3.py` to any of the switches using `scp`
 
 ```shell
@@ -183,7 +181,7 @@ show management api http-commands
 - Similar to Demo-4 we will now try off-box EAPI access from a Python script.
 - First example we will see is using `jsonrpclib` for this run the `demo-5.py` script
 
-NOTE: Replace the login credentials as per your lab and IP address of the switch.
+NOTE: Replace the login credentials as per your lab and IP address / hostname of the switch.
 
 ```shell
 python3 demo-5.py
@@ -215,7 +213,7 @@ python3 demo-5.py
 - Similar to Demo-5 we will now see another example using `pyeapi` library.
 - For this demo run the `demo-6.py` script from this folder.
 
-NOTE: Replace the login credentials as per your lab and IP address of the switch.
+NOTE: Replace the login credentials as per your lab and IP address / hostname of the switch.
 
 ```shell
 python3 demo-6.py
