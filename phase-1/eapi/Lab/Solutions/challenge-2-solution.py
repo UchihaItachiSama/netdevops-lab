@@ -34,13 +34,13 @@ if __name__ == '__main__':
             PASSWORD,
             device
         ) )
-        result = switch.runCmds('latest', ['show hostname', 'show version detail'])
+        result = switch.runCmds('latest', ['show hostname', 'show mlag'])
         hostname = result[0]['hostname']
-        version_detail = result[1]
-        print('Hostname: {} | Model: {} | SW Version: {} | TA Version: {} | MAC Address: {}\n'.format(
+        mlag = result[1]
+        print('Hostname: {} | MLAG State: {}\n'.format(
             hostname,
-            version_detail['modelName'],
-            version_detail['version'],
-            version_detail['details']['packages']['TerminAttr-core']['version'],
-            version_detail['systemMacAddress']
+            mlag['state']
         ))
+        if mlag['state'] == 'active':
+            result = switch.runCmds('latest', ['show mlag interfaces'], 'text')
+            print(result[0]['output'])
