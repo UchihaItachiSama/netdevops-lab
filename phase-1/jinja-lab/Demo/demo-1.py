@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-from pprint import pprint as pp
-from tkinter import Y
 import yaml
 from jinja2 import Template
 
