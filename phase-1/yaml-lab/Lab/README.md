@@ -48,4 +48,11 @@ The solutions for these challenges are present under `Solutions` folder, however
 
 ## Challenge-6
 
-- Using EAPI & python script get the output of `show version` from all switches except `cvx01` and print it in YAML format.
+- Using EAPI & python script from all switches except `cvx01` and print the following `JSON` information in `YAML` format:
+  - Hostname
+  - Model
+  - Software Version
+  - System MAC Address
+  - LLDP Neighbors
+
+- Hint: convert JSON to YAML
