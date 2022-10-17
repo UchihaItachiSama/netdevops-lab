@@ -29,9 +29,9 @@ JSON_INPUT = {
 YAML_INPUT = '''
 hostname: leaf1
 ntp:
-    server: 192.168.0.1
+  server: 192.168.0.1
 spanning_tree:
-    mode: mstp
+  mode: mstp
 service_routing_protocols_model: multi-agent
 '''
 
