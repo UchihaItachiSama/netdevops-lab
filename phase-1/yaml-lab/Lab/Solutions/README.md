@@ -94,3 +94,9 @@ Employee:
     - Month: December
       Wage: 4000
 ```
+
+## Challenge-6
+
+```shell
+python3 challenge-6-solution.py
+```
