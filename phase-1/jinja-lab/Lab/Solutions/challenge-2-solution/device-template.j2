@@ -1,0 +1,17 @@
+{% if devices is defined and devices is not none %}
+Total of {{ devices | length }} devices listed
+----------------------------------------------
+
+{%     for device, data in devices | items %}
+{%        if data.hostname is defined and data.systemMacAddress is defined %}
+{{ data.hostname }} ( System MAC Address {{ data.systemMacAddress }} )
+  Total of {{ data.lldpNeighbors | length }} Neighbor Devices found in LLDP Table
+{%            for neighbor in data.lldpNeighbors %}
+{%                if neighbor.neighborDevice is defined and neighbor.neighborPort is defined and neighbor.port is defined %}
+    - {{ data.hostname }} [ {{ neighbor.port }} ] <----> [ {{ neighbor.neighborPort }} ] {{ neighbor.neighborDevice.split(".")[0] }} 
+{%                endif %}
+{%            endfor %}
+{%        endif %}
+
+{%     endfor %}
+{% endif %}
