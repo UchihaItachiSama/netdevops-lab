@@ -1,0 +1,43 @@
+!
+{% if radius_servers is defined and radius_servers is not none %}
+{%     for radius_server in radius_servers %}
+{%         if radius_server.host is defined and radius_server.host is not none %}
+{%             if radius_server.key is defined and radius_server.key is not none %}
+radius-server host {{ radius_server.host }} key 7 {{ radius_server.key }}
+{%             endif %}
+{%         endif %}
+{%     endfor %}
+{% endif %}
+!
+{% if aaa_server_groups is defined and aaa_server_groups is not none %}
+{%     for aaa_server_group in aaa_server_groups %}
+{%         if aaa_server_group.name is defined and aaa_server_group.type is defined %}
+aaa group server {{ aaa_server_group.type }} {{ aaa_server_group.name }}
+{%             if aaa_server_group.servers is defined and aaa_server_group.servers is not none %}
+{%                 for server in aaa_server_group.servers %}
+{%                     if server.server is defined %}
+   server {{ server.server }}
+{%                     endif %}
+{%                 endfor %}
+{%             endif %}
+{%         endif %}
+{%     endfor %}
+{% endif %}
+!
+{% if aaa_authentication is defined and aaa_authentication is not none %}
+{%     if aaa_authentication.login.default is defined and aaa_authentication.login.default is not none %}
+aaa authentication login default {{ aaa_authentication.login.default }}
+{%     endif %}
+{%     if aaa_authentication.policies.local.allow_nopassword is defined and aaa_authentication.policies.local.allow_nopassword == true %}
+aaa authentication policy local allow-nopassword-remote-login
+{%     endif %}
+{% endif %}
+{% if aaa_authorization is defined and aaa_authorization is not none %}
+{%     if aaa_authorization.exec.default is defined and aaa_authorization.exec.default is not none %}
+aaa authorization exec default {{ aaa_authorization.exec.default }}
+{%     endif %}
+{%     if aaa_authorization.commands.all_default is defined and aaa_authorization.commands.all_default is not none %}
+aaa authorization commands all default {{ aaa_authorization.commands.all_default }}
+{%     endif %}
+{% endif %}
+!
