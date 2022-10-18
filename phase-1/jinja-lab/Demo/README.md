@@ -3,7 +3,7 @@
 ## Demo-1
 
 - In this demo we will take a look at a very basic example of jinja2 template.
-- We will geneate the following CLI configuration:
+- We will generate the following CLI configuration:
 
 ```shell
 !
