@@ -196,3 +196,85 @@ management_api_http:
 ```shell
 python3 demo-3.py
 ```
+
+# Demo-4
+
+- In this demo we will generate the MLAG configuration for following leaf pairs:
+  - leaf1 & leaf2
+  - leaf3 & leaf4
+- We will be using the following YAML input
+
+```yaml
+leafs:
+  leaf1:
+    mlag_configuration:
+      domain_id: MLAG12
+      local_interface: vlan4094
+      peer_address: 172.16.12.2
+      peer_link: port-channel10
+  leaf2:
+    mlag_configuration:
+      domain_id: mlag12
+      local_interface: Vlan4094
+      peer_address: 172.16.12.1
+      peer_link: Port-channel10
+  leaf3:
+    mlag_configuration:
+      domain_id: Mlag34
+      local_interface: VLAN4094
+      peer_address: 172.16.12.2
+      peer_link: port-channel10
+  leaf4:
+    mlag_configuration:
+      domain_id: MLAG34
+      local_interface: Vlan4094
+      peer_address: 172.16.12.1
+      peer_link: Port-channel10
+```
+
+- To generate the following CLI configuration output:
+
+```shell
+Device "leaf1" MLAG Configuration:
+!
+mlag configuration
+   domain-id MLAG12
+   local-interface Vlan4094
+   peer-address 172.16.12.2
+   peer-address Port-channel10
+!
+
+Device "leaf2" MLAG Configuration:
+!
+mlag configuration
+   domain-id MLAG12
+   local-interface Vlan4094
+   peer-address 172.16.12.1
+   peer-address Port-channel10
+!
+
+Device "leaf3" MLAG Configuration:
+!
+mlag configuration
+   domain-id MLAG34
+   local-interface Vlan4094
+   peer-address 172.16.12.2
+   peer-address Port-channel10
+!
+
+Device "leaf4" MLAG Configuration:
+!
+mlag configuration
+   domain-id MLAG34
+   local-interface Vlan4094
+   peer-address 172.16.12.1
+   peer-address Port-channel10
+!
+```
+
+- Run the following python script under `demo-4` folder
+
+```shell
+cd demo-4/
+python3 demo-4.py
+```
