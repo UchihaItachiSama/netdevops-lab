@@ -139,3 +139,60 @@ ethernet_interfaces:
 ```shell
 python3 demo-2.py
 ```
+
+# Demo-3
+
+- In this demo we will take a look at if/else in Jinja template
+- We will render the following output
+
+```shell
+!
+management api http-commands
+   protocol http
+   protocol unix-socket
+   no shutdown
+   !
+   vrf MGMT
+      no shutdown
+   !
+   vrf default
+      no shutdown
+!
+```
+
+- We will see demo using two type of inputs
+
+### YAML
+
+```yaml
+---
+management_api_http:
+  enable_http: false
+  enable_https: true
+  enable_unix_socket: true
+  enable_vrfs:
+    - default
+    - MGMT
+```
+
+### JSON
+
+```json
+{
+    "management_api_http": {
+        "enable_http": false,
+        "enable_https": true,
+        "enable_unix_socket": true,
+        "enable_vrfs": [
+          "default",
+          "MGMT"
+        ]
+    }
+}
+```
+
+- Run the `demo-3.py` script
+
+```shell
+python3 demo-3.py
+```
