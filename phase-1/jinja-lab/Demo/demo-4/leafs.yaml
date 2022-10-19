@@ -15,11 +15,11 @@ leafs:
     mlag_configuration:
       domain_id: Mlag34
       local_interface: VLAN4094
-      peer_address: 172.16.12.2
+      peer_address: 172.16.34.2
       peer_link: port-channel10
   leaf4:
     mlag_configuration:
       domain_id: MLAG34
       local_interface: Vlan4094
-      peer_address: 172.16.12.1
+      peer_address: 172.16.34.1
       peer_link: Port-channel10

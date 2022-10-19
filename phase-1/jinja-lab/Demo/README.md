@@ -148,7 +148,8 @@ python3 demo-2.py
 ```shell
 !
 management api http-commands
-   protocol http
+   no protocol http
+   protocol https
    protocol unix-socket
    no shutdown
    !
@@ -222,13 +223,13 @@ leafs:
     mlag_configuration:
       domain_id: Mlag34
       local_interface: VLAN4094
-      peer_address: 172.16.12.2
+      peer_address: 172.16.34.2
       peer_link: port-channel10
   leaf4:
     mlag_configuration:
       domain_id: MLAG34
       local_interface: Vlan4094
-      peer_address: 172.16.12.1
+      peer_address: 172.16.34.1
       peer_link: Port-channel10
 ```
 
@@ -258,7 +259,7 @@ Device "leaf3" MLAG Configuration:
 mlag configuration
    domain-id MLAG34
    local-interface Vlan4094
-   peer-address 172.16.12.2
+   peer-address 172.16.34.2
    peer-address Port-channel10
 !
 
@@ -267,7 +268,7 @@ Device "leaf4" MLAG Configuration:
 mlag configuration
    domain-id MLAG34
    local-interface Vlan4094
-   peer-address 172.16.12.1
+   peer-address 172.16.34.1
    peer-address Port-channel10
 !
 ```
