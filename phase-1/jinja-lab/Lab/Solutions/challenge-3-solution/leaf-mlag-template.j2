@@ -1,0 +1,89 @@
+!
+{% if vlans is defined and vlans is not none %}
+{%     for vlan, config in vlans | items %}
+vlan {{ vlan }}
+{%         if config.trunk_groups is defined and config.trunk_groups is not none %}
+{%             for trunk_group in config.trunk_groups %}
+   trunk group {{ trunk_group }}
+{%             endfor %}
+{%         endif %}
+{%     endfor %}
+!
+{% endif %}
+{% if vlan_interfaces is defined and vlan_interfaces is not none %}
+{%     for vlan_interface, config in vlan_interfaces | items %}
+interface Vlan{{ vlan_interface }}
+{%         if config.description is defined %}
+   description {{ config.description }}
+{%         endif %}
+{%         if config.ip_address is defined %}
+   ip address {{ config.ip_address }}
+{%         endif %}
+{%         if config.shutdown is defined and config.shutdown == true %}
+   shutdown
+{%         endif %}
+{%     endfor %}
+!
+{% endif %}
+{% if spanning_tree is defined and spanning_tree is not none %}
+{%     if spanning_tree.no_spanning_tree_vlan is defined %}
+no spanning-tree vlan-id {{ spanning_tree.no_spanning_tree_vlan }}
+{%     endif %}
+{% endif %}
+!
+{% if port_channel_interfaces is defined and port_channel_interfaces is not none %}
+{%     for port_channel_interface, config in port_channel_interfaces | items %}
+interface {{ port_channel_interface }}
+{%         if config.description is defined %}
+   description {{ config.description }}
+{%         endif %}
+{%         if config.type is defined and config.type == 'switched' %}
+{%             if config.mode is defined %}
+   switchport mode {{ config.mode }}
+{%             endif %}
+{%             if config.mode == 'trunk' %}
+{%                 if config.trunk_groups is defined and config.trunk_groups is not none %}
+{%                     for trunk_group in config.trunk_groups %}
+   switchport trunk group {{ trunk_group }}
+{%                     endfor %}
+{%                 endif %}
+{%             endif %}
+{%         endif %}
+!
+{%     endfor %}
+{% endif %}
+{% if ethernet_interfaces is defined and ethernet_interfaces is not none %}
+{%     for ethernet_interface, config in ethernet_interfaces | items %}
+interface {{ ethernet_interface }}
+{%         if config.description is defined %}
+   description {{ config.description }}
+{%         endif %}
+{%         if config.type is defined and config.type == 'switched' %}
+{%              if config.mode is defined %}
+   switchport mode {{ config.mode }}
+{%              endif %}
+{%         endif %}
+{%         if config.channel_group is defined %}
+{%             if config.channel_group.id is defined and config.channel_group.mode is defined %}
+   channel-group {{ config.channel_group.id }} mode {{ config.channel_group.mode }}
+{%             endif %}
+{%         endif %}
+!
+{%     endfor %}
+{% endif %}
+{% if mlag_configuration is defined %}
+mlag configuration
+{%     if mlag_configuration.domain_id is defined %}
+   domain-id {{ mlag_configuration.domain_id | upper }}
+{%     endif %}
+{%     if mlag_configuration.local_interface is defined %}
+   local-interface {{ mlag_configuration.local_interface | lower | capitalize }}
+{%     endif %}
+{%     if mlag_configuration.peer_address is defined %}
+   peer-address {{ mlag_configuration.peer_address }}
+{%     endif %}
+{%     if mlag_configuration.peer_link is defined %}
+   peer-link {{ mlag_configuration.peer_link | lower | capitalize }}
+{%     endif %}
+{% endif %}
+!

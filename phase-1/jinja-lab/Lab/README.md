@@ -129,3 +129,201 @@ host2 ( System MAC Address 00:1c:73:b7:d5:01 )
     - host2 [ Ethernet2 ] <----> [ Ethernet4 ] leaf4 
     - host2 [ Ethernet4 ] <----> [ Ethernet5 ] leaf4
 ```
+
+## Challenge-3
+
+- Open `Console Access` from your ATD Lab GUI.
+- From the main menu select the option number `1.Reset All Devices to Base ATD (reset)`
+- Wait for the lab deployment to complete
+
+```shell
+*****************************************
+*****Jump Host for Arista Test Drive*****
+*****************************************
+
+
+==========Main Menu==========
+
+Please select from the following options: 
+1. Reset All Devices to Base ATD (reset)
+2. MLAG Lab (mlag)
+3. BGP Lab (bgp)
+4. VXLAN Lab (vxlan) excludes leaf3 instead of leaf4
+5. EVPN Type 2 Lab (l2evpn) excludes leaf3 instead of leaf4
+6. EVPN Type 5 Lab (l3evpn) excludes leaf3 instead of leaf4
+7. CVP lab (cvp)
+8. CVP lab for Studios L3LS/EVPN (cvpstudl3lsevpn)
+
+
+97. Additional Labs (labs)
+98. SSH to Devices (ssh)
+99. Exit LabVM (quit/exit) - CTRL + c
+
+What would you like to do?: 1
+Starting deployment for Datacenter - reset lab...
+Gathering task information...
+Waiting on change control to finish executing...
+Running additional setup commands...
+Lab Setup Completed. Please press Enter to continue...
+```
+
+- Once completed head back to `Programmability IDE`
+- Here using a YAML and JINJA script to generate the following MLAG configuration for:
+  - leaf1 & leaf2
+  - leaf3 & leaf4
+
+### leaf1
+
+```shell
+!
+vlan 4094
+   trunk group MLAGPEER
+!
+interface Vlan4094
+   description MLAG PEER LINK
+   ip address 172.16.12.1/30
+!
+no spanning-tree vlan-id 4094
+!
+interface Port-Channel10
+   description MLAG PEER LINK - LEAF2
+   switchport mode trunk
+   switchport trunk group MLAGPEER
+!
+interface Ethernet1
+   description MLAG PEER LINK - LEAF2
+   switchport mode trunk
+   channel-group 10 mode active
+!
+interface Ethernet6
+   description MLAG PEER LINK - LEAF2
+   switchport mode trunk
+   channel-group 10 mode active
+!
+mlag configuration
+   domain-id MLAG12
+   local-interface Vlan4094
+   peer-address 172.16.12.2
+   peer-link Port-Channel10
+!
+```
+
+### leaf2
+
+```shell
+!
+vlan 4094
+   trunk group MLAGPEER
+!
+interface Vlan4094
+   description MLAG PEER LINK
+   ip address 172.16.12.2/30
+!
+no spanning-tree vlan-id 4094
+!
+interface Port-Channel10
+   description MLAG PEER LINK - LEAF1
+   switchport mode trunk
+   switchport trunk group MLAGPEER
+!
+interface Ethernet1
+   description MLAG PEER LINK - LEAF1
+   switchport mode trunk
+   channel-group 10 mode active
+!
+interface Ethernet6
+   description MLAG PEER LINK - LEAF1
+   switchport mode trunk
+   channel-group 10 mode active
+!
+mlag configuration
+   domain-id MLAG12
+   local-interface Vlan4094
+   peer-address 172.16.12.1
+   peer-link Port-Channel10
+!
+```
+
+### leaf3
+
+```shell
+!
+vlan 4094
+   trunk group MLAGPEER
+!
+interface Vlan4094
+   description MLAG PEER LINK
+   ip address 172.16.34.1/30
+!
+no spanning-tree vlan-id 4094
+!
+interface Port-Channel10
+   description MLAG PEER LINK - LEAF4
+   switchport mode trunk
+   switchport trunk group MLAGPEER
+!
+interface Ethernet1
+   description MLAG PEER LINK - LEAF4
+   switchport mode trunk
+   channel-group 10 mode active
+!
+interface Ethernet6
+   description MLAG PEER LINK - LEAF4
+   switchport mode trunk
+   channel-group 10 mode active
+!
+mlag configuration
+   domain-id MLAG34
+   local-interface Vlan4094
+   peer-address 172.16.34.2
+   peer-link Port-Channel10
+!
+```
+
+### leaf4
+
+```shell
+!
+vlan 4094
+   trunk group MLAGPEER
+!
+interface Vlan4094
+   description MLAG PEER LINK
+   ip address 172.16.34.2/30
+!
+no spanning-tree vlan-id 4094
+!
+interface Port-Channel10
+   description MLAG PEER LINK - LEAF3
+   switchport mode trunk
+   switchport trunk group MLAGPEER
+!
+interface Ethernet1
+   description MLAG PEER LINK - LEAF3
+   switchport mode trunk
+   channel-group 10 mode active
+!
+interface Ethernet6
+   description MLAG PEER LINK - LEAF3
+   switchport mode trunk
+   channel-group 10 mode active
+!
+mlag configuration
+   domain-id MLAG34
+   local-interface Vlan4094
+   peer-address 172.16.34.1
+   peer-link Port-Channel10
+!
+```
+
+## Challenge-4
+
+- Upload the generated configuration in `Challenge-3` to CVP as configlets:
+  - Phase-1-MLAG-leaf1
+  - Phase-1-MLAG-leaf2
+  - Phase-1-MLAG-leaf3
+  - Phase-1-MLAG-leaf4
+
+- Assign the configlets to the respective devices
+- Execute the generated tasks via a change control on CVP
+- Using EAPI confirm the MLAG State of all leaf switches.

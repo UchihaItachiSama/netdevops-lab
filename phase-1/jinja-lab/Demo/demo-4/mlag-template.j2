@@ -14,7 +14,7 @@ mlag configuration
    peer-address {{ mlag_config.peer_address }}
 {%         endif %}
 {%         if mlag_config.peer_link is defined and mlag_config.peer_link is not none %}
-   peer-address {{ mlag_config.peer_link | lower | capitalize }}
+   peer-link {{ mlag_config.peer_link | lower | capitalize }}
 {%         endif %}
 {%     endif %}
 !
