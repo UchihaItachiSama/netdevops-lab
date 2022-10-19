@@ -8,6 +8,7 @@ from jinja2 import Template, Environment, FileSystemLoader
 import ssl
 import uuid
 from datetime import datetime
+import time
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -111,4 +112,5 @@ if __name__ == '__main__':
     execute_tasks(taskList)
 
     # Check MLAG Status
+    time.sleep(60) # wait for sometime before we probe the switches.
     check_mlag()
