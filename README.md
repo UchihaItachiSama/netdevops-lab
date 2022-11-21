@@ -33,6 +33,25 @@ In Phase-1 of training we will be focusing on the following
 - JINJA2
 - Basics of Git
 
+## Phase-2
+
+`!!!! Build In Progress !!!!`
+
+In Phase-2 of training we will be focusing on the following
+
+- Ansible Basics
+  - Inventory
+  - Variables
+  - Tasks
+  - Playbooks
+  - Roles
+  - Conditionals
+  - Loops
+  - Ansible Modules
+  - Collections
+    - Arista EOS Collection
+    - Arista CVP Collection
+
 ## Getting Started
 
 - Open the `Programmability IDE` in your AVD web interface.

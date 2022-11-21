@@ -1,0 +1,23 @@
+---
+  all:
+    children:
+      spine:
+        hosts:
+          DC1-SPINE1:
+            ansible_host: 192.168.0.1
+          DC1-SPINE2:
+            ansible_host: 192.168.0.2
+      leaf:
+        children:
+          rack01:
+            hosts:
+              DC1-LEAF1A:
+                ansible_host: 192.168.0.3
+              DC1-LEAF1B:
+                ansible_host: 192.168.0.4
+          rack02:
+            hosts:
+              DC1-LEAF2A:
+                ansible_host: 192.168.0.5
+              DC1-LEAF2B:
+                ansible_host: 192.168.0.6
