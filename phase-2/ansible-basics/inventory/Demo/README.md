@@ -107,7 +107,7 @@ Now we will specify the username & password which will be used to connect to the
 
 Since the username & password `arista` is common to all devices we can add it at a level where its inherited by all hosts, instead of adding the value per host.
 
-```shell
+```yaml
 ---
   all:
     children:
