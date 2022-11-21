@@ -33,7 +33,7 @@ all:
 
 Now we will represent the same inventory file in `INI` format.
 
-```shell
+```ini
 [all:children]
 spine
 leaf
