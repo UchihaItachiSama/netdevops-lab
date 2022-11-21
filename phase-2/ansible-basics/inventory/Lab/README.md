@@ -23,7 +23,7 @@ Create two inventory files (one in `YAML` and other in `INI` format) for followi
 
 Further build upon the same inventory files to add the IP addresses for each of the clients.
 
-| Device | MGMT_IP |
+| Device | IP ADDRESS |
 | ------ | ------- |
 | spine1 | 192.168.0.10 |
 | spine2 | 192.168.0.11 |
