@@ -1,0 +1,17 @@
+---
+- name: Demo-1 Playbook 
+  hosts: localhost
+  gather_facts: false
+  vars:
+    credentials:
+      username: arista
+      password: arista
+    switch:
+      - leaf1
+      - leaf2
+      - spine1
+      - spine2
+  tasks:
+    - name: Print variables from playbook
+      debug:
+        msg: " Connecting to '{{ switch[0] }}' using username '{{ credentials.username }}' and password '{{ credentials['password'] }}' "

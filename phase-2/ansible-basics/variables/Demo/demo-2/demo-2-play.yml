@@ -1,0 +1,15 @@
+---
+- name: Demo-2 Playbook
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ./custom_vars.json
+    - ./custom_vars.yml
+  tasks:
+    - name: Print variables imported from files
+      debug:
+        msg: 
+          - " Connecting to '{{ switch[0] }}' using username '{{ credentials.username }}' and password '{{ credentials['password'] }}' "
+          - " Connecting to '{{ switch[1] }}' using username '{{ credentials.username }}' and password '{{ credentials['password'] }}' "
+          - " Connecting to '{{ switch[2] }}' using username '{{ credentials.username }}' and password '{{ credentials['password'] }}' "
+          - " Connecting to '{{ switch[3] }}' using username '{{ credentials.username }}' and password '{{ credentials['password'] }}' "

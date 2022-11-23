@@ -1,0 +1,14 @@
+---
+- name: Demo-3 Playbook
+  hosts: localhost
+  gather_facts: false
+  vars_prompt:
+    - name: username
+      prompt: Enter the login username
+      private: false
+    - name: password
+      prompt: Enter the login password
+      private: true
+  tasks:
+    - debug:
+        msg: "USER_INPUT ==> username is '{{ username }}' & password '{{ password }}' "
