@@ -1,0 +1,8 @@
+---
+- name: Demo-7 Playbook
+  hosts: leafs
+  gather_facts: false
+  tasks:
+    - name: Testing variables from group_vars and host_vars
+      debug:
+        msg: "Device: {{ inventory_hostname }} || IP: {{ ansible_host }} || Port: {{ ansible_port }} || Username: {{ ansible_username }} || Password: {{ ansible_password }}"

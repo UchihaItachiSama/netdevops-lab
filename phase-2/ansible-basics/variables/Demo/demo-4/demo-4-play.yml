@@ -1,0 +1,11 @@
+---
+- name: Demo-4 Playbook
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Execute command and register output
+      command: "git --version"
+      register: result
+    - name: Print command output
+      debug:
+        var:  result.stdout_lines

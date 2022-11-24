@@ -1,0 +1,4 @@
+---
+ansible_port: 443
+ansible_username: cvpadmin
+ansible_password: arista

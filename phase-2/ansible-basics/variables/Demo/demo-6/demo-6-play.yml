@@ -1,0 +1,8 @@
+---
+- name: Demo-6 Playbook
+  hosts: leafs
+  gather_facts: false
+  tasks:
+    - name: Testing variables from inventory
+      debug:
+        msg: "Device: {{ inventory_hostname }} || IP: {{ ansible_host }} || Port: {{ ansible_port }}"

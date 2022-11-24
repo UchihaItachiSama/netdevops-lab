@@ -1,0 +1,13 @@
+---
+- name: Demo-5 Playbook
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Execute command and register output
+      shell: "cat /etc/hosts | egrep spine1"
+      register: result
+    - set_fact:
+        switch: "{{ result.stdout.split() }}"
+    - name: Print command result
+      debug:
+        msg: "Device: '{{ switch[1] }}' || MGMT_IP: {{ switch[0] }}"

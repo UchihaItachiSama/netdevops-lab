@@ -1,0 +1,27 @@
+---
+all:
+  children:
+    fabric:  
+      children:  
+        spines:
+          hosts:
+            spine1:
+              ansible_host: 192.168.0.10
+            spine2:
+              ansible_host: 192.168.0.11
+        leafs:
+          children:
+            rack01:
+              hosts:
+                leaf1:
+                  ansible_host: 192.168.0.12
+                leaf2:
+                  ansible_host: 192.168.0.13
+            rack02:
+              hosts:
+                leaf3:
+                  ansible_host: 192.168.0.14
+                leaf4:
+                  ansible_host: 192.168.0.15
+      vars:
+        ansible_port: 443
