@@ -21,3 +21,8 @@
                 ansible_host: 192.168.0.5
               DC1-LEAF2B:
                 ansible_host: 192.168.0.6
+    hosts:
+      DC1-HOST1:
+        ansible_host: 192.168.0.7
+      DC1-HOST2:
+        ansible_host: 192.168.0.8
