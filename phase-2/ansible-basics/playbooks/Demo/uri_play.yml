@@ -1,0 +1,22 @@
+---
+- name: Demo ansible.builtin.uri module
+  hosts: localhost
+  gather_facts: false
+  vars:
+    city: California
+  tasks:
+    - name: Check the weather for city {{ city }}
+      ansible.builtin.uri:
+        url: "https://goweather.herokuapp.com/weather/{{ city }}"
+        method: GET
+        validate_certs: no
+        body: '{}'
+      register: result
+      until: result.status == 200
+      retries: 10
+      delay: 10
+    - name: Print weather result for city {{ city }}
+      debug:
+        msg:
+          - "The weather forecast in {{ city }} right now is '{{ result.json.description | lower }}' with"
+          - "temperature of {{ result.json.temperature }} and wind {{ result.json.wind }}" 

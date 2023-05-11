@@ -1,0 +1,28 @@
+---
+- name: Demo play LEAF switches
+  hosts: leafs
+  gather_facts: false
+  tasks:
+    - name: Run command
+      arista.eos.command:
+        commands:
+          - show version
+          - show hostname
+      register: result
+    - name: Print command output
+      debug:
+        msg: "{{ result.stdout_lines }}"
+
+- name: Demo play SPINE switches
+  hosts: spines
+  gather_facts: false
+  tasks:
+    - name: Run command
+      arista.eos.command:
+        commands:
+          - show clock
+          - show hostname
+      register: result
+    - name: Print command output
+      debug:
+        msg: "{{ result.stdout_lines }}"
