@@ -1,0 +1,11 @@
+- name: Demo ansible.builtin.template module
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Load variables from file
+      ansible.builtin.include_vars:
+        file: ./vars.yml
+    - name: Generate configuration
+      ansible.builtin.template:
+        src: ./template.j2
+        dest: ./DC1-Leaf1.cfg

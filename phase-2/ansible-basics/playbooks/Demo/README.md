@@ -74,9 +74,11 @@ Using the `ansible.builtin.uri` module we will send a HTTPS GET request to a URL
           - "temperature of {{ result.json.temperature }} and wind {{ result.json.wind }}"
 
 % ansible-playbook uri_play.yml
-``
+```
 
 ## Demo-3
+
+Using the `ansible.builtin.file` module we will creat a directory and clone a repository from github using `ansible.builtin.git` into the created directory.
 
 ### Playbook-3
 
@@ -100,4 +102,65 @@ Using the `ansible.builtin.uri` module we will send a HTTPS GET request to a URL
         clone: yes
 
 % ansible-playbook file_play.yml
+```
+
+## Demo-4
+
+Using the `ansible.builtin.template` module we will render switch CLI configuration using YAML input and Jinja2 Template.
+
+### Jinja2 Template
+
+```jinja
+{#- Ethernet Interface #}
+{% if ethernet_interfaces is defined %}
+{%     for ethernet_interface in ethernet_interfaces | sort %}
+!
+interface {{ ethernet_interface }}
+{%         if ethernet_interfaces[ethernet_interface].description is defined %}
+   description {{ ethernet_interfaces[ethernet_interface].description }}
+{%         endif %}
+{%         if ethernet_interfaces[ethernet_interface].type is defined and ( ethernet_interfaces[ethernet_interface].type | lower ) == 'routed' %}
+   no switchport
+{%             if ethernet_interfaces[ethernet_interface].ip_address is defined %}
+   ip address {{ ethernet_interfaces[ethernet_interface].ip_address }}
+{%             endif %}
+{%         endif %}
+{%     endfor %}
+{% endif %}
+```
+
+### YAML Input
+
+```yaml
+---
+ethernet_interfaces:
+  Ethernet1:
+    description: Uplink to DC1-Spine1
+    type: routed
+    ip_address: 10.10.0.1/30
+  Ethernet2:
+    description: Uplink to DC1-Spine2
+    type: routed
+    ip_address: 10.10.0.5/30
+  Ethernet3:
+    description: Uplink to DC1-Spine3
+    type: routed
+    ip_address: 10.10.0.9/30
+```
+
+### Playbook-3
+
+```yaml
+- name: Demo ansible.builtin.template module
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Load variables from file
+      ansible.builtin.include_vars:
+        file: ./vars.yml
+    - name: Generate configuration
+      ansible.builtin.template:
+        src: ./template.j2
+        dest: ./DC1-Leaf1.cfg
+
 ```

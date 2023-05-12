@@ -1,0 +1,16 @@
+{#- Ethernet Interface #}
+{% if ethernet_interfaces is defined %}
+{%     for ethernet_interface in ethernet_interfaces | sort %}
+!
+interface {{ ethernet_interface }}
+{%         if ethernet_interfaces[ethernet_interface].description is defined %}
+   description {{ ethernet_interfaces[ethernet_interface].description }}
+{%         endif %}
+{%         if ethernet_interfaces[ethernet_interface].type is defined and ( ethernet_interfaces[ethernet_interface].type | lower ) == 'routed' %}
+   no switchport
+{%             if ethernet_interfaces[ethernet_interface].ip_address is defined %}
+   ip address {{ ethernet_interfaces[ethernet_interface].ip_address }}
+{%             endif %}
+{%         endif %}
+{%     endfor %}
+{% endif %}

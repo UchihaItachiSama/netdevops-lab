@@ -1,0 +1,14 @@
+---
+ethernet_interfaces:
+  Ethernet1:
+    description: Uplink to DC1-Spine1
+    type: routed
+    ip_address: 10.10.0.1/30
+  Ethernet2:
+    description: Uplink to DC1-Spine2
+    type: routed
+    ip_address: 10.10.0.5/30
+  Ethernet3:
+    description: Uplink to DC1-Spine3
+    type: routed
+    ip_address: 10.10.0.9/30
