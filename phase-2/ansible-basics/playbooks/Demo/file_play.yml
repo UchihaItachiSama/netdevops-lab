@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Creat a directory if it does not exists
+    - name: Create a directory if it does not exists
       ansible.builtin.file:
         path: ./training
         state: directory

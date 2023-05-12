@@ -78,7 +78,7 @@ Using the `ansible.builtin.uri` module we will send a HTTPS GET request to a URL
 
 ## Demo-3
 
-Using the `ansible.builtin.file` module we will creat a directory and clone a repository from github using `ansible.builtin.git` into the created directory.
+Using the `ansible.builtin.file` module we will create a directory and clone a repository from github using `ansible.builtin.git` into the created directory.
 
 ### Playbook-3
 
@@ -90,7 +90,7 @@ Using the `ansible.builtin.file` module we will creat a directory and clone a re
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Creat a directory if it does not exists
+    - name: Create a directory if it does not exists
       ansible.builtin.file:
         path: ./training
         state: directory
@@ -148,7 +148,7 @@ ethernet_interfaces:
     ip_address: 10.10.0.9/30
 ```
 
-### Playbook-3
+### Playbook-4
 
 ```yaml
 - name: Demo ansible.builtin.template module
