@@ -7,8 +7,6 @@ Using the `arista.eos.eos_command` module we will get the output of some command
 ### Playbook-1
 
 ```yaml
-% cat eos_command_play.yml
-
 ---
 - name: Demo play LEAF switches
   hosts: leafs
@@ -37,8 +35,6 @@ Using the `arista.eos.eos_command` module we will get the output of some command
     - name: Print command output
       debug:
         msg: "{{ result.stdout_lines }}"
-
-% ansible-playbook -i inventory.yml eos_command_play.yml
 ```
 
 ## Demo-2
@@ -48,8 +44,6 @@ Using the `arista.eos.eos_command` module we will get the output of some command
 Using the `ansible.builtin.uri` module we will send a HTTPS GET request to a URL and print the result.
 
 ```yaml
-% cat uri_play.yml
-
 ---
 - name: Demo ansible.builtin.uri module
   hosts: localhost
@@ -72,8 +66,6 @@ Using the `ansible.builtin.uri` module we will send a HTTPS GET request to a URL
         msg:
           - "The weather forecast in {{ city }} right now is '{{ result.json.description | lower }}' with"
           - "temperature of {{ result.json.temperature }} and wind {{ result.json.wind }}"
-
-% ansible-playbook uri_play.yml
 ```
 
 ## Demo-3
@@ -83,8 +75,6 @@ Using the `ansible.builtin.file` module we will create a directory and clone a r
 ### Playbook-3
 
 ```yaml
-% cat file_play.yml
-
 ---
 - name: Demo ansible.builtin.file and ansible.builtin.git modules
   hosts: localhost
@@ -100,8 +90,6 @@ Using the `ansible.builtin.file` module we will create a directory and clone a r
         repo: https://github.com/aristanetworks/cvprac
         dest: ./training/cvprac
         clone: yes
-
-% ansible-playbook file_play.yml
 ```
 
 ## Demo-4
