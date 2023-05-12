@@ -4,7 +4,7 @@
   gather_facts: false
   tasks:
     - name: Run command
-      arista.eos.command:
+      arista.eos.eos_command:
         commands:
           - show version
           - show hostname
@@ -18,7 +18,7 @@
   gather_facts: false
   tasks:
     - name: Run command
-      arista.eos.command:
+      arista.eos.eos_command:
         commands:
           - show clock
           - show hostname

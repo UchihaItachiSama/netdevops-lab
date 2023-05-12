@@ -1,0 +1,15 @@
+---
+- name: Demo ansible.builtin.file and ansible.builtin.git modules
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Creat a directory if it does not exists
+      ansible.builtin.file:
+        path: ./training
+        state: directory
+        mode: '0755'
+    - name: Clone 'cvprac' into above directory
+      ansible.builtin.git:
+        repo: https://github.com/aristanetworks/cvprac
+        dest: ./training/cvprac
+        clone: yes
