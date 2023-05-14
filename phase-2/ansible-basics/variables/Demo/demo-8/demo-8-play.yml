@@ -1,0 +1,19 @@
+- name: Demo-8 Playbook
+  hosts: leafs
+  gather_facts: true
+  tasks:
+    - name: Create folder
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/training"
+        state: directory
+        mode: '0755'
+      run_once: true
+    - name: Create files for each switch
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/training/{{ inventory_hostname }}.cfg"
+        state: touch
+    - name: Dump ansible facts to file
+      ansible.builtin.copy:
+        content: "{{ ansible_facts }}"
+        dest: "{{ playbook_dir }}/training/{{ inventory_hostname }}.cfg"
+      delegate_to: localhost
