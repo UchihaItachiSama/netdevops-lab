@@ -1,0 +1,13 @@
+---
+- name: Basic playbook
+  hosts: localhost
+  gather_facts: false
+  vars:
+    file: /etc/hosts
+  tasks:
+    - name: Get contents of file {{ file }}
+      ansible.builtin.command: cat {{ file }}
+      register: output
+    - name: Print output
+      ansible.builtin.debug:
+        msg: "{{ output.stdout_lines }}"

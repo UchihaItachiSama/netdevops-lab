@@ -14,4 +14,6 @@
   tasks:
     - name: Print variables from playbook
       debug:
-        msg: " Connecting to '{{ switch[0] }}' using username '{{ credentials.username }}' and password '{{ credentials['password'] }}' "
+        msg:
+          - " Connecting to '{{ switch[0] }}' using username '{{ credentials.username }}' and password '{{ credentials['password'] }}' "
+          - " Connecting to '{{ switch[-1] }}' using username '{{ credentials.username }}' and password '{{ credentials['password'] }}' "
