@@ -1,0 +1,40 @@
+---
+- name: Demo-3 Playbook
+  hosts: leaf1
+  gather_facts: false
+  tasks:
+    - name: Configure L3 interface
+      block:
+        - name: Create configuration checkpoint
+          arista.eos.eos_command:
+            commands: configure checkpoint save ckp-demo-3-1 
+
+        - name: Set interface Ethernet2 configuration
+          arista.eos.eos_config:
+            lines:
+              - description UPLINK TO SPINE1
+              - ip address 10.10.0.1/30
+            parents: interface Ethernet2
+        
+        - name: Set interface Ethernet3 configuration
+          arista.eos.eos_config:
+            lines:
+              - description UPLINK TO SPINE2
+              - ip address 10.10.0.255/30
+            parents: interface Ethernet3
+      
+      rescue:
+        - name: Roll back from checkpoint
+          arista.eos.eos_command:
+            commands: configure checkpoint restore ckp-demo-3-1
+      
+      always:
+        - name: Check interface configuration
+          arista.eos.eos_command:
+            commands: show running-config interfaces Ethernet 2-3
+          register: output
+        
+        - name: Print output
+          ansible.builtin.debug:
+            msg: "{{ output.stdout_lines }}"
+            
