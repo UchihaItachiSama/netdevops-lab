@@ -1,0 +1,68 @@
+!
+! Management Access
+interface Management1
+   ip address {{ ansible_host }}/24
+!
+! Management Routes
+{% for static_route in static_routes | sort %}
+ip route {{ static_route.destination_prefix }} {{ static_route.gateway }}
+{% endfor %}
+!
+hostname {{ inventory_hostname }}
+!
+! NTP Servers
+{% for ntp_server in ntp_servers | sort %}
+ntp server {{ ntp_server }}
+{% endfor %}
+!
+clock timezone {{ clock.timezone }}
+!
+! Name Servers
+{% for name_server in name_servers | sort %}
+ip name-server {{ name_server}}
+{% endfor %}
+!
+dns domain {{ dns_domain }}
+!
+! AAA 
+aaa authorization exec default {{ aaa_authorization.exec.default }}
+aaa authorization commands all default {{ aaa_authorization.commands.all_default }}
+{% if aaa_authentication.policies.local.allow_nopassword == true %}
+aaa authentication policy local allow-nopassword-remote-login
+{% endif %}
+!
+! Users
+aaa root secret sha512 {{ aaa_root.sha512_password }}
+{% for user in local_users %}
+{%     set user_cli = "username " ~ user ~ " privilege " ~ local_users[user].privilege ~ " role " ~ local_users[user].role %}
+{%     if local_users[user].no_password is defined and local_users[user].no_password == true %}
+{%         set user_cli = user_cli ~ " nopassword" %}
+{%     else %}
+{%         set user_cli = user_cli ~ " secret sha512 " ~ local_users[user].sha512_password %}
+{%     endif %}
+{{ user_cli }}
+{% endfor %}
+!
+! eAPI
+{% if management_api_http is defined %}
+management api http-commands
+{%     if management_api_http.enable_http == true %}
+   protocol http
+{%     endif %}
+{%     if management_api_http.enable_https == true %}
+   protocol https
+{%     endif %}
+{%     if management_api_http.enable_unix_socket == true %}
+   protocol unix-socket
+{%     endif %}
+   no shutdown
+{% endif %}
+!
+{% if banners is defined %}
+{%     if banners.login is defined %}
+banner login
+{{ banners.login }}
+{%     endif%}
+{% endif %}
+!
+end

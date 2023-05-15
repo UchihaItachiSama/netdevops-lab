@@ -1,0 +1,6 @@
+---
+- name: Demo Playbook using arista_baseline role
+  hosts: leafs, spines
+  gather_facts: false
+  roles:
+    - arista_baseline

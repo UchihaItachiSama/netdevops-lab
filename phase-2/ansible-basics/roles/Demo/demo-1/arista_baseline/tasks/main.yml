@@ -1,0 +1,13 @@
+---
+# tasks file for arista_baseline
+- name: Create target folder
+  file:
+    path: "{{ playbook_dir }}/configs"
+    state: directory
+    mode: '0755'
+  run_once: true
+- name: Generate baseline configuration for {{ inventory_hostname }} Arista switch
+  template:
+    src: baseline.j2
+    dest: "{{ playbook_dir }}/configs/{{ inventory_hostname }}_baseline.cfg"
+  delegate_to: localhost

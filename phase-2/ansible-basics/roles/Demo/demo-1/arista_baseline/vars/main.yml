@@ -1,0 +1,52 @@
+---
+# vars file for arista_baseline
+dns_domain: aristanetworks.com
+clock:
+  timezone: UTC
+ntp_servers:
+  - ntp.aristanetworks.com
+  - time.google.com
+static_routes:
+  - destination_prefix: 0.0.0.0/0
+    gateway: 10.85.128.1
+name_servers:
+  - 172.22.22.10
+  - 172.22.22.40
+aaa_root:
+  sha512_password: $6$SV63cqAiZoy5nRCo$rXWc/CJSVBN17VtaxaZsvYbY4N4.OihJgZGonBsouKJpHZXIAEbvJAgopkvLQTFiqVYRg4.BX0BJGhD1QX.En.
+local_users:
+  admin:
+    privilege: 15
+    role: network-admin
+    no_password: true
+  cvpadmin:
+    privilege: 15
+    role: network-admin
+    sha512_password: $6$VxMZJSTG1bWpf6sN$vxdnrMRQhmwKRysTjD07HlR.gKEqtkYX7aUMLkyblVYkLbSd6vQol1Ugj2a59Gp7DYkP2eXpKYjpjuMWtWxTA.
+management_api_http:
+  enable_http: true
+  enable_https: true
+  enable_unix_socket: true
+banners:
+  login: |
+    #############################################################
+    #                                                           #
+    #  This switch is part of the TAC lab.                      #
+    #                                                           #
+    #  If you need further information please email             #
+    #                                                           #
+    #          tac-team@aristanetworks.com                      #
+    #                                                           #
+    #  -- TAC Team --                                           #
+    #                                                           #
+    #############################################################
+    EOF
+aaa_authorization:
+  exec:
+    default: local
+  commands:
+    all_default: local
+aaa_authentication:
+  policies:
+    local:
+      allow_nopassword: true
