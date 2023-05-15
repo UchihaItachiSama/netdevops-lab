@@ -1,17 +1,17 @@
 ---
 # vars file for arista_baseline
-dns_domain: aristanetworks.com
+dns_domain: testing.com
 clock:
   timezone: UTC
 ntp_servers:
-  - ntp.aristanetworks.com
+  - 0.pool.ntp.org
   - time.google.com
 static_routes:
   - destination_prefix: 0.0.0.0/0
-    gateway: 10.85.128.1
+    gateway: 192.168.0.1
 name_servers:
-  - 172.22.22.10
-  - 172.22.22.40
+  - 8.8.8.8
+  - 1.1.1.1
 aaa_root:
   sha512_password: $6$SV63cqAiZoy5nRCo$rXWc/CJSVBN17VtaxaZsvYbY4N4.OihJgZGonBsouKJpHZXIAEbvJAgopkvLQTFiqVYRg4.BX0BJGhD1QX.En.
 local_users:
@@ -31,13 +31,13 @@ banners:
   login: |
     #############################################################
     #                                                           #
-    #  This switch is part of the TAC lab.                      #
+    #        This switch is part of the Automation lab.         #
+    #                                                           #    
+    #        All connections are monitored and recorded         #
     #                                                           #
-    #  If you need further information please email             #
+    # disconnect IMMEDIATELY if you are not an authorized user! #                                                           #
     #                                                           #
-    #          tac-team@aristanetworks.com                      #
-    #                                                           #
-    #  -- TAC Team --                                           #
+    #             -- Data Center Team --                        #
     #                                                           #
     #############################################################
     EOF
