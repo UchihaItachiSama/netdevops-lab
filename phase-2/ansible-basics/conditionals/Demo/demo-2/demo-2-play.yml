@@ -1,0 +1,14 @@
+---
+- name: Wait for L3 interfaces to be configured
+  hosts: rack01
+  gather_facts: false
+  tasks:
+    - name: Check route
+      arista.eos.eos_command:
+        commands:
+          - command: show ip route 192.168.12.0/24
+            output: json
+      register: output
+      until: output.stdout_lines[0].vrfs.default.routes.keys() | length > 0
+      delay: 2
+      retries: 50

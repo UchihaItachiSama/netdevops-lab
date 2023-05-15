@@ -1,0 +1,19 @@
+---
+- name: Configure L3 interfaces
+  hosts: rack01
+  gather_facts: false
+  vars:
+    switch_vars:
+      leaf1:
+        Ethernet1:
+          ipv4_address: '192.168.12.1'
+      leaf2:
+        Ethernet1:
+          ipv4_address: '192.168.12.2'
+  tasks:
+    - name: L3 interface configuration
+      arista.eos.eos_config:
+        lines:
+          - no switchport
+          - ip address {{ switch_vars[inventory_hostname].Ethernet1.ipv4_address }}/24
+        parents: interface {{ switch_vars[inventory_hostname].keys() | first }}
