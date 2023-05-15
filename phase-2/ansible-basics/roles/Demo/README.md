@@ -32,18 +32,18 @@ Now we will define role variables, by updating the `vars/main.yml` file which we
 ```yaml
 ---
 # vars file for arista_baseline
-dns_domain: aristanetworks.com
+dns_domain: testing.com
 clock:
   timezone: UTC
 ntp_servers:
-  - ntp.aristanetworks.com
+  - 0.pool.ntp.org
   - time.google.com
 static_routes:
   - destination_prefix: 0.0.0.0/0
-    gateway: 10.85.128.1
+    gateway: 192.168.0.1
 name_servers:
-  - 172.22.22.10
-  - 172.22.22.40
+  - 8.8.8.8
+  - 1.1.1.1
 aaa_root:
   sha512_password: $6$SV63cqAiZoy5nRCo$rXWc/CJSVBN17VtaxaZsvYbY4N4.OihJgZGonBsouKJpHZXIAEbvJAgopkvLQTFiqVYRg4.BX0BJGhD1QX.En.
 local_users:
@@ -136,18 +136,18 @@ interface Management1
    ip address 192.168.0.10/24
 !
 ! Management Routes
-ip route 0.0.0.0/0 10.85.128.1
+ip route 0.0.0.0/0 192.168.0.1
 !
 hostname spine1
 !
 ! NTP Servers
-ntp server ntp.aristanetworks.com
+ntp server 0.pool.ntp.org
 ntp server time.google.com
 !
 clock timezone UTC
 !
 ! Name Servers
-ip name-server 172.22.22.10
-ip name-server 172.22.22.40
+ip name-server 1.1.1.1
+ip name-server 8.8.8.8
 !
 ```
