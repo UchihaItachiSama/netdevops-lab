@@ -1,0 +1,27 @@
+---
+- name: Demo-0 Playbook
+  hosts: spines
+  gather_facts: false
+  tasks:
+    - name: Configure Interfaces
+      arista.eos.eos_interfaces:
+        config:
+          - name: "{{ item }}"
+            description: Configured using Ansible
+            mode: layer3
+            enabled: true
+            mtu: 9000
+      loop:
+        - Ethernet2
+        - Ethernet3
+        - Ethernet4
+        - Ethernet5
+    
+    - name: Gather Interface Facts
+      arista.eos.eos_interfaces:
+        state: gathered
+      register: intf_output
+    
+    - name: Print Interface Facts
+      ansible.builtin.debug:
+        msg: "{{ intf_output }}"

@@ -1,0 +1,28 @@
+---
+- name: Demo-1 Playbook
+  hosts: spines
+  gather_facts: false
+  tasks:
+    - name: Configure Interfaces
+      arista.eos.eos_interfaces:
+        config:
+          - name: "{{ item.name }}"
+            description: "{{ item.description }}"
+            mode: layer3
+            enabled: true
+            mtu: 9001
+        state: replaced
+      loop:
+        - { name: 'Ethernet2', description: 'P2P_LINK_TO_LEAF1' }
+        - { name: 'Ethernet3', description: 'P2P_LINK_TO_LEAF2' }
+        - { name: 'Ethernet4', description: 'P2P_LINK_TO_LEAF3' }
+        - { name: 'Ethernet5', description: 'P2P_LINK_TO_LEAF4' }
+    
+    - name: Gather Interface Facts
+      arista.eos.eos_interfaces:
+        state: gathered
+      register: intf_output
+    
+    - name: Print Interface Facts
+      ansible.builtin.debug:
+        msg: "{{ intf_output }}"

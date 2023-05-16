@@ -1,0 +1,34 @@
+---
+- name: Demo-2 Playbook
+  hosts: spines
+  gather_facts: false
+  vars:
+    spine_interfaces:
+      Ethernet2:
+        description: P2P_L3_LINK_TO_LEAF1
+      Ethernet3:
+        description: P2P_L3_LINK_TO_LEAF2
+      Ethernet4:
+        description: P2P_L3_LINK_TO_LEAF3
+      Ethernet5:
+        description: P2P_L3_LINK_TO_LEAF4
+  tasks:
+    - name: Configure Interfaces
+      arista.eos.eos_interfaces:
+        config:
+          - name: "{{ item.key }}"
+            description: "{{ item.value.description }}"
+            mode: layer3
+            enabled: true
+            mtu: 9002
+        state: replaced
+      loop: "{{ spine_interfaces | dict2items }}"
+    
+    - name: Gather Interface Facts
+      arista.eos.eos_interfaces:
+        state: gathered
+      register: intf_output
+    
+    - name: Print Interface Facts
+      ansible.builtin.debug:
+        msg: "{{ intf_output }}"
