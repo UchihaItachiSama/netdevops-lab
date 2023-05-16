@@ -1,0 +1,67 @@
+{# VLAN Configuration #}
+{% for vlan in vlans | sort %}
+!
+vlan {{ vlan }}
+{%     if vlans[vlan].name is defined %}
+   name {{ vlans[vlan].name }}
+{%     endif %}
+{%     for trunk_group in vlans[vlan].trunk_groups | sort %}
+   trunk group {{ trunk_group }}
+{%     endfor %}
+{% endfor %}
+
+{# STP configuration #}
+{% if spanning_tree is defined %}
+{%     if spanning_tree.no_spanning_tree_vlan is defined %}
+!
+no spanning-tree vlan-id {{ spanning_tree.no_spanning_tree_vlan }}
+{%     endif %}
+{% endif %}
+
+{# VLAN Interface #}
+{% for vlan_interface in vlan_interfaces | sort %}
+!
+interface {{ vlan_interface }}
+{%     if vlan_interfaces[vlan_interface].description is defined %}
+   description {{ vlan_interfaces[vlan_interface].description }}
+{%     endif %}
+{%     if vlan_interfaces[vlan_interface].ip_address is defined %}
+   ip address {{ vlan_interfaces[vlan_interface].ip_address }}
+{%     endif %}
+{%     if vlan_interfaces[vlan_interface].no_autostate is defined and vlan_interfaces[vlan_interface].no_autostate == true %}
+   no autostate
+{%     endif %}
+{% endfor %}
+
+{# Ethernet interfaces #}
+{% for ethernet_interface in ethernet_interfaces | sort %}
+!
+interface {{ ethernet_interface }}
+{%     if ethernet_interfaces[ethernet_interface].channel_group is defined %}
+   channel-group {{ ethernet_interfaces[ethernet_interface].channel_group.id }} mode {{ ethernet_interfaces[ethernet_interface].channel_group.mode }}
+{%     endif %}
+{% endfor %}
+
+{# Port-Channel Interfaces #}
+{% for port_channel_interface in port_channel_interfaces | sort %}
+!
+interface {{ port_channel_interface }}
+{%     if port_channel_interfaces[port_channel_interface].type == "switched" %}
+{%         if port_channel_interfaces[port_channel_interface].mode == "trunk" %}
+   switchport mode trunk
+{%             for trunk_group in port_channel_interfaces[port_channel_interface].trunk_groups %}
+   switchport trunk group {{ trunk_group }}
+{%             endfor %}
+{%         endif %}
+{%     endif %}
+{% endfor %}
+
+{# MLAG Configuration #}
+{% if mlag_config is defined %}
+!
+mlag configuration
+   domain-id {{ mlag_config.domain_id }}
+   local-interface {{ mlag_config.local_interface }}
+   peer-address {{ mlag_config.peer_address }}
+   peer-link {{ mlag_config.peer_link }}
+{% endif %}

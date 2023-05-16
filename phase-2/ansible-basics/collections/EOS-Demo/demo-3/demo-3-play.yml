@@ -1,0 +1,12 @@
+---
+- name: Demo-3 Play
+  hosts: rack01
+  gather_facts: false
+  tasks:
+    - name: Configure MLAG on leaf switches {{ ansible_play_hosts }}
+      arista.eos.eos_config:
+        src: "{{ playbook_dir }}/eos-mlag.j2"
+        backup: true
+        backup_options:
+          filename: "{{ inventory_hostname }}-backup.cfg"
+          dir_path: "{{ playbook_dir }}/backup-configs"

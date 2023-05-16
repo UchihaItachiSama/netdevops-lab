@@ -1,0 +1,36 @@
+---
+all:
+  children:
+    fabric:  
+      children:  
+        spines:
+          hosts:
+            spine1:
+              ansible_host: 192.168.0.10
+            spine2:
+              ansible_host: 192.168.0.11
+        leafs:
+          children:
+            rack01:
+              hosts:
+                leaf1:
+                  ansible_host: 192.168.0.12
+                leaf2:
+                  ansible_host: 192.168.0.13
+            rack02:
+              hosts:
+                leaf3:
+                  ansible_host: 192.168.0.14
+                leaf4:
+                  ansible_host: 192.168.0.15
+      vars:
+        ansible_connection: httpapi
+        ansible_httpapi_use_ssl: true
+        ansible_httpapi_validate_certs: false
+        ansible_user: arista
+        ansible_password: aristas3j8
+        ansible_become: true
+        ansible_become_method: enable
+        ansible_network_os: eos
+        ansible_httpapi_port: 443
+        ansible_python_interpreter: $(which python3)

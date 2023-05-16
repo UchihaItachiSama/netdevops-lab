@@ -1,0 +1,16 @@
+---
+- name: Demo-2 Playbook
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Run commands
+      arista.eos.eos_command:
+        commands:
+          - command: show interfaces status connected
+            output: text
+          - command: show arp
+            output: json
+      register: cmd_output
+    - name: Print command output
+      ansible.builtin.debug:
+        msg: "{{ cmd_output.stdout_lines }}"

@@ -1,0 +1,11 @@
+- name: Demo-1 Playbook
+  hosts: rack01
+  gather_facts: false
+  tasks:
+    - name: Gather EOS Facts
+      arista.eos.eos_facts:
+        gather_subset:
+          - config
+    - name: Print EOS Facts
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts.net_config }}"
