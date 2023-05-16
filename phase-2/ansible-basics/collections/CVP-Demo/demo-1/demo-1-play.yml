@@ -1,0 +1,20 @@
+---
+- name: Demo-1 Playbook
+  hosts: CloudVision
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Collect devices facts from {{ inventory_hostname }}
+      arista.cvp.cv_facts_v3:
+        facts:
+          - configlets
+          - devices
+          - containers
+      register: cvp_facts
+    
+    - name: Print CVP Facts
+      ansible.builtin.debug:
+        msg: 
+          - "{{ cvp_facts.data.cvp_configlets.keys() }}"
+          - "{{ cvp_facts.data.cvp_containers }}"
+          - "{{ cvp_facts.data.cvp_devices }}"

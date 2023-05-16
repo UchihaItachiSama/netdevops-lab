@@ -1,0 +1,23 @@
+---
+vlans:
+  4094:
+    name: MLAG_PEER_VLAN
+    trunk_groups:
+      - MLAG_PEER
+spanning_tree:
+  no_spanning_tree_vlan: 4094
+ethernet_interfaces:
+  Ethernet1:
+    channel_group:
+      id: 1
+      mode: active
+  Ethernet6:
+    channel_group:
+      id: 1
+      mode: active
+port_channel_interfaces:
+  Port-Channel1:
+    type: switched
+    mode: trunk
+    trunk_groups:
+      - MLAG_PEER

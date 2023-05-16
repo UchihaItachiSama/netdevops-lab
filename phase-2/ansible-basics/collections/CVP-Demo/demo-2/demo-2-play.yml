@@ -1,0 +1,73 @@
+- name: Generate EOS MLAG Configuration
+  hosts: rack01
+  gather_facts: false
+  tasks:
+    - name: Create backup folder
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/backups"
+        state: directory
+        mode: '0755'
+      run_once: true
+    
+    - name: Create configuration folder
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/intended/configs"
+        state: directory
+        mode: '0755'
+      run_once: true
+    
+    - name: Backup existing Configuration
+      arista.eos.eos_facts:
+        gather_subset:
+          - config
+    
+    - name: Backup configuration to file
+      ansible.builtin.copy:
+        content: "{{ ansible_facts.net_config }}"
+        dest: "{{ playbook_dir }}/backups/{{ inventory_hostname }}_backup.cfg"
+      delegate_to: localhost
+    
+    - name: Render MLAG configuration
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/eos-mlag.j2"
+        dest: "{{ playbook_dir }}/intended/configs/{{ inventory_hostname }}.cfg"
+
+- name: Demo ansible-cvp
+  hosts: CloudVision
+  connection: local
+  gather_facts: false
+  vars:
+    configlet_list:
+      DC1_Leaf1_MLAG: "{{ lookup( 'file', playbook_dir + '/intended/configs/leaf1.cfg' ) }}"
+      DC1_Leaf2_MLAG: "{{ lookup( 'file', playbook_dir + '/intended/configs/leaf2.cfg' ) }}"
+    device_list:
+      - fqdn: "leaf2.atd.lab"
+        parentContainerName: "Leaf"
+        configlets:
+          - "ATD-INFRA"
+          - "BaseIPv4_Leaf2"
+          - "DC1_Leaf2_MLAG"
+      - fqdn: "leaf1.atd.lab"
+        parentContainerName: "Leaf"
+        configlets:
+          - "ATD-INFRA"
+          - "BaseIPv4_Leaf1"
+          - "DC1_Leaf1_MLAG"
+  tasks:
+    - name: Create configlets on CVP
+      arista.cvp.cv_configlet_v3:
+        configlets: "{{ configlet_list }}"
+        configlets_notes: "Configlets managed by Ansible"
+        state: present
+      register: cvp_configlet
+    - name: Map Configlets to devices
+      arista.cvp.cv_device_v3:
+        devices: "{{ device_list }}"
+        state: present
+        search_key: fqdn
+      register: cvp_device
+    - name: Execute resulting tasks from previous operation
+      arista.cvp.cv_task_v3:
+        tasks: "{{ cvp_device.taskIds }}"
+      register: cvp_task
+      failed_when: not cvp_task.success

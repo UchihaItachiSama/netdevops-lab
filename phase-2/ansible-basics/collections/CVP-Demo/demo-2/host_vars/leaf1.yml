@@ -1,0 +1,10 @@
+vlan_interfaces:
+  Vlan4094:
+    description: MLAG_PEER_VLAN
+    ip_address: 10.10.0.49/30
+    no_autostate: true
+mlag_config:
+  domain_id: DC1_RACK01
+  local_interface: Vlan4094
+  peer_address: 10.10.0.50
+  peer_link: Port-Channel1

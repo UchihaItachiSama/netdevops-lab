@@ -1,0 +1,42 @@
+- name: Demo ansible-cvp
+  hosts: CloudVision
+  connection: local
+  gather_facts: false
+  vars:
+    configlet_list:
+      DC1_Leaf1_MLAG: "{{ lookup( 'file', playbook_dir + '/intended/configs/leaf1.cfg' ) }}"
+      DC1_Leaf2_MLAG: "{{ lookup( 'file', playbook_dir + '/intended/configs/leaf2.cfg' ) }}"
+    device_list:
+      - fqdn: "leaf2.atd.lab"
+        parentContainerName: "Leaf"
+        configlets:
+          - "ATD-INFRA"
+          - "BaseIPv4_Leaf2"
+      - fqdn: "leaf1.atd.lab"
+        parentContainerName: "Leaf"
+        configlets:
+          - "ATD-INFRA"
+          - "BaseIPv4_Leaf1"
+  tasks:
+    - name: Map Configlets to devices
+      arista.cvp.cv_device_v3:
+        devices: "{{ device_list }}"
+        state: present
+        search_key: fqdn
+        apply_mode: strict
+      register: cvp_device
+    - name: Execute resulting tasks from previous operation
+      arista.cvp.cv_task_v3:
+        tasks: "{{ cvp_device.taskIds }}"
+      register: cvp_task
+    - name: Wait for 60 seconds
+      ansible.builtin.wait_for:
+        timeout: 60
+      delegate_to: localhost
+    - name: Create configlets on CVP
+      arista.cvp.cv_configlet_v3:
+        configlets: "{{ configlet_list }}"
+        configlets_notes: "Configlets managed by Ansible"
+        state: absent
+      register: cvp_configlet
+      when: cvp_task.success == true
