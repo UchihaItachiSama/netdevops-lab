@@ -5,6 +5,7 @@ In Phase-2 of training we will be focusing on the following
 - Ansible Basics
   - Inventory
   - Variables
+  - Ad hoc commands
   - Tasks
   - Playbooks
   - Roles

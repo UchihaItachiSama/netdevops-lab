@@ -15,6 +15,7 @@ This module includes demo and practise labs on the following topics:
 - CVP REST APIs
 - Git
 - Ansible
+- ansible-eos collection
 - ansible-cvp collection
 - ansible-avd collection
 
@@ -35,12 +36,11 @@ In Phase-1 of training we will be focusing on the following
 
 ## Phase-2
 
-`!!!! Build In Progress !!!!`
-
 In Phase-2 of training we will be focusing on the following
 
 - Ansible Basics
   - Inventory
+  - Ad hoc commands
   - Variables
   - Tasks
   - Playbooks
