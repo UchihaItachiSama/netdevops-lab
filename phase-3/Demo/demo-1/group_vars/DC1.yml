@@ -24,7 +24,7 @@ spine:
     # Set the relevant platform as each platform has different default values in Ansible AVD
     platform: cEOS-LAB
     # Pool of IPv4 addresses to configure interface Loopback0 used for BGP EVPN sessions
-    loopback_ipv4_pool: 10.0.0.0/24 #10.255.0.0/27
+    loopback_ipv4_pool: 10.255.0.0/27
     # BGP ASN
     bgp_as: 65100
     # Definition of nodes contained in this group.
@@ -46,13 +46,13 @@ l3leaf:
     # Set the relevant platform as each platform has different default values in Ansible AVD
     platform: cEOS-LAB
     # Pool of IPv4 addresses to configure interface Loopback0 used for BGP EVPN sessions
-    loopback_ipv4_pool: 10.1.3.0/24 #10.255.0.0/27
+    loopback_ipv4_pool: 10.255.0.0/27
     # Offset all assigned loopback IP addresses.
     # Required when the < loopback_ipv4_pool > is same for 2 different node_types (like spine and l3leaf) to avoid over-lapping IPs.
     # For example, set the minimum offset l3leaf.defaults.loopback_ipv4_offset: < total # spine switches > or vice versa.
     loopback_ipv4_offset: 2
     # Definition of pool of IPs to be used as Virtual Tunnel EndPoint (VXLAN origin and destination IPs)
-    vtep_loopback_ipv4_pool: 10.1.4.0/24 #10.255.1.0/27
+    vtep_loopback_ipv4_pool: 10.255.1.0/27
     # Ansible hostname of the devices used to establish neighborship (IP assignments and BGP peering)
     uplink_switches:
       - s1-spine1
@@ -64,11 +64,11 @@ l3leaf:
       - Ethernet1
       - Ethernet6
     # Definition of pool of IPs to be used in P2P links
-    uplink_ipv4_pool: 10.1.2.0/24 #10.255.255.0/26
+    uplink_ipv4_pool: 10.255.255.0/26
     # Definition of pool of IPs to be used for MLAG peer-link connectivity
-    mlag_peer_ipv4_pool: 10.1.6.0/24 #10.255.1.64/27
+    mlag_peer_ipv4_pool: 10.255.1.64/27
     # iBGP Peering between MLAG peers
-    mlag_peer_l3_ipv4_pool: 10.1.5.0/24 #10.255.1.96/27
+    mlag_peer_l3_ipv4_pool: 10.255.1.96/27
     # Virtual router mac for VNIs assigned to Leaf switches in format xx:xx:xx:xx:xx:xx
     virtual_router_mac_address: 00:1c:73:00:00:99
     spanning_tree_priority: 4096
