@@ -1,0 +1,87 @@
+---
+# Common AVD group variables
+fabric_name: FABRIC
+
+# p2p unlinks mtu for cEOS
+p2p_uplinks_mtu: 1500
+
+# Local user configuration
+local_users:
+  arista:
+    privilege: 15
+    role: network-admin
+    no_password: true
+    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvVKUIPCO3oab27+TrAsZsFIoVBHDoAj/WrJG0ibVydB8NNARSGCxXDZvXgR/ZUm2M1npbWrke5nCg1ptj9LCVk/ljG4/DpQ8G/qtCm7DrxeX3RLAPYYlKd7TloIezgmu8/qeRB6FJYnouGa38a23v+THvwg8qUqmibDLVQ2XiZh2mE6pM1aJvlHIgmUEcrGpzRTRWB/dXSPJDzO5YCyvgnsoJtTzAzx3p2x8WXWRZe0bQToAHKjGm5WptSH2W82PmuQOR1oKHNrFjl+d0vG4Oc0YvZTdASbESjzcyY6w2Uz9kw83IBoCNDNRHPTo6733ECRiTPdt/XoV6XNr2666r arista@avd-apac-training-demo-lab-1-822c6546-eos
+
+# CloudVision Portal definitions
+cvp_instance_ip: 192.168.0.5
+terminattr_smashexcludes: "ale,flexCounter,hardware,kni,pulse,strata"
+terminattr_ingestexclude: "/Sysdb/cell/1/agent,/Sysdb/cell/2/agent"
+terminattr_disable_aaa: true
+cvp_token_file: /tmp/token
+custom_structured_configuration_daemon_terminattr:
+  cvcompression: gzip
+
+# Multi-agent routing protocol
+service_routing_protocols_model: multi-agent
+
+# Default STP flavor as MSTP
+custom_structured_configuration_spanning_tree:
+  mode: mstp
+
+# Enable ip routing
+ip_routing: true
+
+# OOB MGMT Settings
+mgmt_interface: Management0
+mgmt_gateway: 192.168.0.1
+mgmt_interface_vrf: default
+
+# DNS Settings
+dns_domain: atd.lab
+
+# eAPI
+management_eapi:
+  enable_https: true
+
+# NTP
+ntp:
+  servers:
+    - name: 192.168.0.1
+      iburst: true
+      local_interface: Management0
+
+# RADIUS
+radius_servers:
+  - host: 192.168.0.1
+    key: 0207165218120E
+
+ip_radius_source_interfaces:
+    - name: Management0
+
+# AAA settings
+aaa_server_groups:
+  - name: atds
+    type: radius
+    servers:
+      - server: 192.168.0.1
+
+aaa_authentication:
+  login:
+    default: group atds local
+
+aaa_authorization:
+  exec:
+    default: group atds local
+  commands:
+    all_default: local
+
+eos_cli: |
+  !
+  username admin privilege 15 role network-admin secret 5 $1$5O85YVVn$HrXcfOivJEnISTMb6xrJc.
+  username arista privilege 15 role network-admin secret 5 $1$4VjIjfd1$XkUVulbNDESHFzcxDU.Tk1
+  !
+  system l1
+     unsupported speed action error
+     unsupported error-correction action error
+  !

@@ -1,0 +1,24 @@
+---
+- name: Build and Deploy Single DC EVPN VxLAN Symmetric IRB Fabric ( eBGP Overlay and eBGP Underlay )
+  hosts: FABRIC
+  gather_facts: false
+  tasks:
+    #- name: Generate EOS Snapshots
+    #  ansible.builtin.import_role:
+    #    name: arista.avd.eos_snapshot
+
+    - name: Generate AVD Structured Configurations and Fabric Documentation
+      ansible.builtin.import_role:
+        name: arista.avd.eos_designs
+    
+    - name: Generate Device Configurations and Documentation
+      ansible.builtin.import_role:
+        name: arista.avd.eos_cli_config_gen
+
+    - name: Deploy generated configuration to devices
+      ansible.builtin.import_role:
+        name: arista.avd.eos_config_deploy_eapi
+    
+    #- name: Validate states on EOS devices
+    #  ansible.builtin.import_role:
+    #    name: arista.avd.eos_validate_state

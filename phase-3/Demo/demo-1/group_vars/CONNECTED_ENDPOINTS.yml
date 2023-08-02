@@ -1,0 +1,47 @@
+---
+port_profiles:
+  - profile: pod1_servers
+    mode: trunk
+    vlans: 11,12
+  - profile: pod2_servers
+    mode: trunk
+    vlans: 21,22
+
+# Definition of connected endpoints in the fabric.
+servers:
+  - name: dc1-pod1-servers
+    adapters:
+        # Name of the server interfaces that will be used in the description of each interface
+      - endpoint_ports:
+          - Ethernet1
+          - Ethernet2
+        # Switch interfaces where the server ports are connected.
+        switch_ports:
+          - Ethernet4
+          - Ethernet4
+        # Switch names where the server ports are connected.
+        switches:
+          - s1-leaf1
+          - s1-leaf2
+        spanning_tree_portfast: edge
+        profile: pod1_servers
+        # Definition of the pair of ports as port channel.
+        port_channel:
+          description: MLAG_PortChannel
+          mode: active
+  - name: dc1-pod2-servers
+    adapters:
+      - endpoint_ports:
+          - Ethernet1
+          - Ethernet2
+        switch_ports:
+          - Ethernet4
+          - Ethernet4
+        switches:
+          - s1-leaf3
+          - s1-leaf4
+        spanning_tree_portfast: edge
+        profile: pod2_servers
+        port_channel:
+          description: MLAG_PortChannel
+          mode: active

@@ -1,0 +1,47 @@
+---
+all:
+  children:
+    CLOUDVISION:
+      hosts:
+        cvp:
+          ansible_user: arista
+          ansible_password: aristav7qv
+          ansible_connection: httpapi
+          ansible_httpapi_use_ssl: true
+          ansible_httpapi_validate_certs: false
+          ansible_network_os: eos
+    FABRIC:
+      children:
+        DC1:
+          children:
+            DC1_SPINES:
+              hosts:
+                s1-spine1:
+                s1-spine2:
+            DC1_LEAFS:
+              children:
+                DC1_LEAFS_POD1:
+                  hosts:
+                    s1-leaf1:
+                    s1-leaf2:
+                DC1_LEAFS_POD2:
+                  hosts:
+                    s1-leaf3:
+                    s1-leaf4:
+      vars:
+        ansible_connection: httpapi
+        ansible_httpapi_use_ssl: true
+        ansible_httpapi_validate_certs: false
+        ansible_user: arista
+        ansible_password: aristav7qv
+        ansible_become: true
+        ansible_become_method: enable
+        ansible_network_os: eos
+        ansible_httpapi_port: 443
+        ansible_python_interpreter: $(which python3)
+    NETWORK_SERVICES:
+      children:
+        DC1_LEAFS:
+    CONNECTED_ENDPOINTS:
+      children:
+        DC1_LEAFS:
