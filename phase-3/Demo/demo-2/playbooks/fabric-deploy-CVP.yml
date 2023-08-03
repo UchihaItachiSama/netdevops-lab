@@ -1,0 +1,15 @@
+- name: Deploy configuration via CloudVision Portal
+  hosts: CLOUDVISION
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Deploy Device configuration via CVP
+      ansible.builtin.import_role:
+        name: arista.avd.eos_config_deploy_cvp
+      vars:
+        container_root: 'DC2'
+        configlets_prefix: 'DC2-AVD'
+        device_filter: 's2'
+        state: present
+        cv_collection: v3
+        execute_tasks: false
