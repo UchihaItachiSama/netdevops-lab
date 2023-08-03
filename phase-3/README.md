@@ -2,11 +2,10 @@
 
 In this section we will be focusing on demo and labs around the `Arista Validated Designs` (AVD).
 
-You will find there are 3 demo labs created:
+You will find there are 2 demo labs created:
 
 - Demo-1 ( Single DC L3LS deployment using eAPI )
 - Demo-2 ( Single DC L3LS deployment using CVP )
-- Demo-3 ( Single DC L3LS deployment with BatFish validation )
 
 2 practice labs have been created with for self study, based on the Demo labs.
 

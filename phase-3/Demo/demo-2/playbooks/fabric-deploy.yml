@@ -1,5 +1,5 @@
 ---
-- name: Build and Deploy Single DC EVPN L3LS VxLAN Symmetric IRB Fabric ( eBGP Overlay and eBGP Underlay )
+- name: Build and Deploy Single DC EVPN L3LS VxLAN Symmetric IRB Fabric ( iBGP Overlay and OSPF Underlay )
   hosts: FABRIC
   gather_facts: false
   tasks:

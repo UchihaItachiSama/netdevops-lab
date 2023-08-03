@@ -1,0 +1,37 @@
+---
+tenants:
+  - name: CUSTOMER_A
+    mac_vrf_vni_base: 10000
+    enable_mlag_ibgp_peering_vrfs: false
+    vrfs:
+      - name: VRF_10
+        vrf_vni: 10
+        vtep_diagnostic:
+          loopback: 10
+          loopback_ip_range: 10.255.10.0/27
+        svis:
+          - id: 11
+            name: VRF_10_VLAN_11
+            enabled: true
+            ip_address_virtual: 10.10.11.1/24
+            tags:
+              - pod1
+          - id: 12
+            name: VRF_10_VLAN_12
+            enabled: true
+            ip_address_virtual: 10.10.12.1/24
+            tags:
+              - pod1
+          - id: 21
+            name: VRF_10_VLAN_21
+            enabled: true
+            ip_address_virtual: 10.10.21.1/24
+            tags:
+              - pod2
+          - id: 22
+            name: VRF_10_VLAN_22
+            enabled: true
+            ip_address_virtual: 10.10.22.1/24
+            tags:
+              - pod2
+            
