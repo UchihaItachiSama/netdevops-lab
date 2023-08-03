@@ -57,8 +57,8 @@ Phase 2 includes demo and lab modules for the following topics:
 Phase 3 contains demo and lab modules focusing on the following topics:
 
 - Arista ansible AVD collection
-  - Single DC L3LS deployment with eAPI
-  - Single DC L3LS deployment with CVP
+  - Single DC L3LS EVPN/VXLAN Symmetric IRB (eBGP overlay & eBGP underlay) deployment with eAPI
+  - Single DC L3LS EVPN/VXLAN Symmetric IRB (iBGP overlay & OSPF underlay) deployment with CVP
 
 ## Getting Started
 

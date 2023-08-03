@@ -4,8 +4,10 @@ In this section we will be focusing on demo and labs around the `Arista Validate
 
 You will find there are 2 demo labs created:
 
-- Demo-1 ( Single DC L3LS deployment using eAPI )
-- Demo-2 ( Single DC L3LS deployment using CVP )
+- Demo-1
+  - Single DC L3LS EVPN/VXLAN Symmetric IRB (eBGP overlay & eBGP underlay) deployment with eAPI
+- Demo-2
+  - Single DC L3LS EVPN/VXLAN Symmetric IRB (iBGP overlay & OSPF underlay) deployment with CVP
 
 2 practice labs have been created with for self study, based on the Demo labs.
 
