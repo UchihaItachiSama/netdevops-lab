@@ -4,7 +4,7 @@
   - Complete the Phase-1 training and Labs
   - Complete the Phase-2 training and Labs.
   - Spin up a `Dual Datacenter` ATD lab
-  - If ATD access is not there spin up a cEOS/vEOS lab with 2 Spine + 4 Leaf + 2 switches as hosts. Similar to topology [here](`../Demo/images/demo-1.png`).
+  - If ATD access is not there spin up a cEOS/vEOS lab with 2 Spine + 4 Leaf + 2 switches as hosts. Similar to topology [here](../Demo/images/demo-1.png).
 
 ## Lab 1
 
