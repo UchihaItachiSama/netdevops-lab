@@ -1,0 +1,23 @@
+---
+anta_inventory:
+  hosts:
+    - host: 192.168.0.10
+      name: s1-spine1
+      tags: ['DC1', 'spine']
+    - host: 192.168.0.11
+      name: s1-spine2
+      tags: ['DC1', 'spine']
+    - host: 192.168.0.12
+      name: s1-leaf1
+      tags: ['DC1', 'leaf', 'pod1']
+    - host: 192.168.0.13
+      name: s1-leaf2
+      tags: ['DC1', 'leaf', 'pod1']
+    - host: 192.168.0.14
+      name: s1-leaf3
+      tags: ['DC1', 'leaf', 'pod2']
+    - host: 192.168.0.15
+      name: s1-leaf4
+      tags: ['DC1', 'leaf', 'pod2']
+
+# anta --username arista --password aristav7qv --inventory anta-inventory.yml nrfu --catalog anta-test.yml table --tags pod1

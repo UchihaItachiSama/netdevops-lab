@@ -1,0 +1,53 @@
+---
+anta.tests.software:
+  - VerifyEOSVersion:
+      versions:
+        - '4.30.1F-32315456.4301F (engineering build)'
+  - VerifyTerminAttrVersion:
+      versions:
+        - 'v1.27.0'
+
+anta.tests.system:
+  - VerifyAgentLogs:
+  - VerifyCPUUtilization:
+  - VerifyCoredump:
+  - VerifyFileSystemUtilization:
+  - VerifyMemoryUtilization:
+  - VerifySyslog:
+  - VerifyNTP:
+
+anta.tests.interfaces:
+  - VerifyPortChannels:
+  - VerifySVI:
+  - VerifyIllegalLACP:
+  - VerifyInterfaceErrDisabled:
+  - VerifyInterfaceErrors:
+  - VerifyLoopbackCount:
+      number: 3
+
+anta.tests.mlag:
+  - VerifyMlagStatus:
+  - VerifyMlagInterfaces:
+  - VerifyMlagConfigSanity:
+
+anta.tests.vxlan:
+  - VerifyVxlan1Interface:
+
+anta.tests.routing:
+  generic:
+    - VerifyRoutingProtocolModel:
+        model: multi-agent
+    - VerifyBFD:
+  bgp:
+    - VerifyBGPIPv4UnicastState:
+    - VerifyBGPIPv4UnicastCount:
+        number: 3
+        template_params:
+          - vrf: default
+    - VerifyBGPIPv4UnicastCount:
+        number: 1
+        template_params:
+          - vrf: VRF_10
+    - VerifyBGPEVPNState:
+    - VerifyBGPEVPNCount:
+        number: 2
